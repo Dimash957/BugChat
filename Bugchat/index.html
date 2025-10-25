@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BugSenseAI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <button class="menu-btn">☰</button>
+        
+        <div class="sidebar-item" id="createNewChat">
+            <div class="sidebar-item-icon">+</div>
+            <span>Create new chat</span>
+        </div>
+        
+        <div class="sidebar-item" id="chatLibrary">
+            <div class="sidebar-item-icon">↺</div>
+            <span>Chat library</span>
+        </div>
+
+        <div class="chat-history" id="chatHistoryContainer"></div>
+        
+        <div class="sidebar-bottom">
+            <div class="profile-item">
+                <div class="profile-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
+                    </svg>
+                </div>
+                <span>Profile</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <a href="https://bug-sense-ai-final-final-final-fina.vercel.app/" class="pro-button" target="_blank">Go to pro</a>
+        
+        <div class="logo">
+            <div class="hexagon">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="hexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#d4926a;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#4a7a8a;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" 
+                             fill="none" 
+                             stroke="url(#hexGradient)" 
+                             stroke-width="3"/>
+                    <circle cx="50" cy="50" r="8" fill="#5a8a9a"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages"></div>
+
+        <h1 class="welcome-text" id="welcomeText">
+            Welcome to BugSenseAI. I'm ready to help you
+        </h1>
+
+        <div class="input-container">
+            <input 
+                type="text" 
+                class="input-field" 
+                id="websiteInput"
+                placeholder="Add link of your web-site here...."
+            >
+            <input 
+                type="text" 
+                class="code-input" 
+                id="codeInput"
+                placeholder="...or put your code here...."
+            >
+            <button class="add-btn" id="submitBtn">+</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

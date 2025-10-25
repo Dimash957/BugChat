@@ -1,6 +1,51 @@
 let chatHistory = [];
 let currentChat = [];
 
+// Helper function to display messages
+function displayMessages() {
+    const messagesContainer = document.getElementById('chatMessages');
+    messagesContainer.innerHTML = '';
+    
+    currentChat.forEach(msg => {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${msg.type}`;
+        messageDiv.textContent = msg.text;
+        messagesContainer.appendChild(messageDiv);
+    });
+    
+    messagesContainer.classList.add('active');
+    document.getElementById('welcomeText').style.display = 'none';
+}
+
+// Handle file upload
+document.getElementById('fileInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const fileContent = event.target.result;
+        
+        // Add user message with file info
+        currentChat.push({ 
+            type: 'user', 
+            text: `Uploaded file: ${file.name}\n\nContent:\n${fileContent.substring(0, 500)}${fileContent.length > 500 ? '...' : ''}` 
+        });
+        
+        // Add AI response
+        const aiResponse = `I've received your file "${file.name}". Analyzing the code for potential bugs and issues...`;
+        currentChat.push({ type: 'ai', text: aiResponse });
+        
+        // Display messages
+        displayMessages();
+        
+        // Reset file input
+        e.target.value = '';
+    };
+    
+    reader.readAsText(file);
+});
+
 // Create new chat
 document.getElementById('createNewChat').addEventListener('click', function() {
     if (currentChat.length > 0) {
@@ -67,7 +112,11 @@ document.getElementById('submitBtn').addEventListener('click', function() {
     const websiteInput = document.getElementById('websiteInput').value.trim();
     const codeInput = document.getElementById('codeInput').value.trim();
     
-    if (!websiteInput && !codeInput) return;
+    // If both inputs are empty, open file picker
+    if (!websiteInput && !codeInput) {
+        document.getElementById('fileInput').click();
+        return;
+    }
     
     const userMessage = websiteInput || codeInput;
     
@@ -79,18 +128,7 @@ document.getElementById('submitBtn').addEventListener('click', function() {
     currentChat.push({ type: 'ai', text: aiResponse });
     
     // Display messages
-    const messagesContainer = document.getElementById('chatMessages');
-    messagesContainer.innerHTML = '';
-    
-    currentChat.forEach(msg => {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${msg.type}`;
-        messageDiv.textContent = msg.text;
-        messagesContainer.appendChild(messageDiv);
-    });
-    
-    messagesContainer.classList.add('active');
-    document.getElementById('welcomeText').style.display = 'none';
+    displayMessages();
     
     // Clear inputs
     document.getElementById('websiteInput').value = '';

@@ -4,6 +4,7 @@ let currentChat = [];
 // Helper function to display messages
 function displayMessages() {
     const messagesContainer = document.getElementById('chatMessages');
+    const mainContent = document.querySelector('.main-content');
     messagesContainer.innerHTML = '';
     
     currentChat.forEach(msg => {
@@ -15,6 +16,10 @@ function displayMessages() {
     
     messagesContainer.classList.add('active');
     document.getElementById('welcomeText').style.display = 'none';
+    mainContent.classList.add('chat-active');
+    
+    // Scroll to bottom of messages
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
 // Handle file upload
@@ -48,6 +53,8 @@ document.getElementById('fileInput').addEventListener('change', function(e) {
 
 // Create new chat
 document.getElementById('createNewChat').addEventListener('click', function() {
+    const mainContent = document.querySelector('.main-content');
+    
     if (currentChat.length > 0) {
         chatHistory.push([...currentChat]);
         currentChat = [];
@@ -58,6 +65,7 @@ document.getElementById('createNewChat').addEventListener('click', function() {
     document.getElementById('welcomeText').style.display = 'block';
     document.getElementById('websiteInput').value = '';
     document.getElementById('codeInput').value = '';
+    mainContent.classList.remove('chat-active');
 });
 
 // Toggle chat library
@@ -137,9 +145,23 @@ document.getElementById('submitBtn').addEventListener('click', function() {
 
 // Allow Enter key to submit
 document.getElementById('websiteInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') document.getElementById('submitBtn').click();
+    if (e.key === 'Enter') {
+        const websiteInput = document.getElementById('websiteInput').value.trim();
+        const codeInput = document.getElementById('codeInput').value.trim();
+        
+        if (websiteInput || codeInput) {
+            document.getElementById('submitBtn').click();
+        }
+    }
 });
 
 document.getElementById('codeInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') document.getElementById('submitBtn').click();
+    if (e.key === 'Enter') {
+        const websiteInput = document.getElementById('websiteInput').value.trim();
+        const codeInput = document.getElementById('codeInput').value.trim();
+        
+        if (websiteInput || codeInput) {
+            document.getElementById('submitBtn').click();
+        }
+    }
 });

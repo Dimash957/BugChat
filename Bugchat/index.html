@@ -62,20 +62,28 @@
             Welcome to BugSenseAI. I'm ready to help you
         </h1>
 
-        <div class="input-container">
-            <input 
-                type="text" 
-                class="input-field" 
-                id="websiteInput"
-                placeholder="Add link of your web-site here...."
-            >
-            <input 
-                type="text" 
-                class="code-input" 
-                id="codeInput"
-                placeholder="...or put your code here...."
-            >
-            <button class="add-btn" id="submitBtn">+</button>
+        <div class="input-wrapper">
+            <div class="input-container">
+                <input 
+                    type="text" 
+                    class="input-field" 
+                    id="websiteInput"
+                    placeholder="Add link of your web-site here...."
+                >
+                <input 
+                    type="text" 
+                    class="code-input" 
+                    id="codeInput"
+                    placeholder="...or put your code here...."
+                >
+                <input 
+                    type="file" 
+                    id="fileInput" 
+                    style="display: none;"
+                    accept=".html,.css,.js,.jsx,.ts,.tsx,.py,.java,.cpp,.c,.php,.rb,.go,.txt"
+                >
+                <button class="add-btn" id="submitBtn">+</button>
+            </div>
         </div>
     </div>
 
